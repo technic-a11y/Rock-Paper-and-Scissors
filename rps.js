@@ -1,68 +1,84 @@
-//First function. Function to get computer choice.
 function getComputerChoice() {
-    let randomNum = Math.floor(Math.random() * 3);
-    if (randomNum === 0) return 'rock';
-    if (randomNum === 1) return 'paper';
-    return 'scissors';
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomNumber = Math.floor (Math.random() * 3);
+    
+    if (randomNumber === 0) {
+        return choices[0];
+    } else if (randomNumber === 1) {
+        return choices[1];
+    } else if (randomNumber === 2) {
+        return choices[2];
 }
-console.log(getComputerChoice("scissors"));
-//Second function. Function to get user choice.
-function getUserChoice() {
-    let userInput = prompt("Choose rock, paper or scissors:");
-    userInput = userInput.toLowerCase().trim();
-    if (userInput === null) {
-        return null; // User cancelled the prompt
-    } else if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
-        return userInput;
-    } else {
-        console.log("Invalid choice. Please choose rock, paper or scissors.");
-        return null; // Recursively prompt until valid input
-    }
-    return userInput;
-}
-console.log(getUserChoice());
-//Create two variables to track scores.
+};
+
 let humanScore = 0;
 let computerScore = 0;
 
+function humanChoice() {
+    return; 
+}
 
-//Third function. Function to play a round.
-    
-function playRound(humanChoice, computerChoice) {
-    const humanSelection = getUserChoice(caseInsensitive = false);
-    const computerSelection = getComputerChoice();
-    if (humanSelection === null) {
-        return; // Exit if user input is invalid
-    } else if (humanSelection === computerSelection) {
-        return "It's a tie!";
-    } else if  (humanSelection === 'rock' && computerSelection === 'scissors') {
+function playRound (humanChoice, computerChoice) {
+    const playerSelection = humanChoice;
+    const computerSelection = computerChoice;
+    if (playerSelection === computerSelection) {
+        return `It's a tie! You both chose ${playerSelection}`;
+    }
+
+    if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
         humanScore++;
-        return "You win! Rock beats Scissors.";
-    } else if (humanSelection === 'paper' && computerSelection === 'rock') {
-        humanScore++;
-        return "You win! Paper beats Rock.";
-    } else if (humanSelection === 'scissors' && computerSelection === 'paper') {
-        humanScore++;
-        return "You win! Scissors beats Paper.";
+        return `You Win! ${playerSelection} beats ${computerSelection}`;
     } else {
         computerScore++;
-        return `You lose! ${computerSelection} beats ${humanSelection}.`;
+        return `You Lose! ${computerSelection} beats ${playerSelection}`
     }
 }
-console.log(playRound(getUserChoice, getComputerChoice));
-//Fourth function. Function to play a game of 5 rounds.
-function playGame() {
-    let round = 5;
-    if (round < 5) {
-        console.log(playRound());
-        round++;
-    }
-    if (humanScore > computerScore) {
-        return "Congratulations! You won the game!";
-    } else if (computerScore > humanScore) {
-        return "Sorry, you lost the game.";
-    } else {
-        return "The game is a tie!";
-    }
+
+
+const rockBtn = document.createElement('button');
+rockBtn.textContent = 'Rock';
+document.body.appendChild(rockBtn);
+
+const paperBtn = document.createElement('button');
+paperBtn.textContent = 'Paper';
+document.body.appendChild(paperBtn);
+
+const scissorsBtn = document.createElement('button');
+scissorsBtn.textContent = 'Scissors';
+document.body.appendChild(scissorsBtn);
+
+
+rockBtn.addEventListener('click', () => {
+    const result = playRound('rock', getComputerChoice());
+    console.log(result);
+    console.log(`Scores - You: ${humanScore}, Computer: ${computerScore}`);
+});
+
+paperBtn.addEventListener ('click', () => {
+    const result = playRound ('paper', getComputerChoice());
+    console.log (result);
+    console.log (`Scores -You: ${humanScore}, Computer: ${computerScore}`);
+});
+
+scissorsBtn.addEventListener ('click', () => {
+    const result = playRound ('scissors', getComputerChoice());
+    console.log (result);
+    console.log (`Scores -You: ${humanScore}, Computer: ${computerScore}`);
+});
+
+function checkWinner() {
+    for (let i = 0; i < 5; i++) {
+        if (humanScore === 5) {
+            console.log ('Congratulations! You are the overall winner!');   
+        } else if (computerScore === 5) {
+            console.log ('Sorry, the computer wins this time.');
+        } else {
+            console.log ('The game is a tie!');
+        }
 }
-console.log(playGame(playRound(), 5));
+}
+// Try for.each method or maybe individual event listeners for each button?
