@@ -1,0 +1,178 @@
+//First function. Function to get computer choice.
+
+const getChoices = [ 'rock', 'paper', 'scissors' ];
+
+function getComputerChoice() {
+    let randomNum = Math.floor(Math.random() * 3);
+    return getChoices[randomNum];
+}
+
+
+
+// We need to delete prompt calls and push these options to the browser buttons instead
+
+
+//Create two variables to track scores.
+let humanScore = 0;
+let computerScore = 0;
+
+
+//Third function. Function to play a round.
+
+function playRound(humanSelection) {
+   
+// Prevent play when somebody already won
+    if (humanScore === 5 || computerScore === 5) {
+        return;
+    }
+
+    const computerSelection = getComputerChoice();
+
+    if (humanSelection === computerSelection) {
+        return "It's a tie!";
+    } else if (humanSelection === 'rock' && computerSelection === 'scissors') {
+        humanScore++;
+        return "You win! Rock beats Scissors.";
+    } else if (humanSelection === 'paper' && computerSelection === 'rock') {
+        humanScore++;
+        return "You win! Paper beats Rock.";
+    } else if (humanSelection === 'scissors' && computerSelection === 'paper') {
+        humanScore++;
+        return 'You win! Scissors beats Paper.';
+    } else {
+        computerScore++;
+        return `You lose! ${computerSelection} beats ${humanSelection}.`;
+    } 
+} 
+const resultDiv = document.createElement('div');
+document.body.appendChild(resultDiv);
+resultDiv.textContent = '';
+
+
+//Fourth function. Function to play a game of five rounds.
+
+const rockBtn = document.createElement ('button');
+rockBtn.textContent = 'Rock';
+document.body.appendChild(rockBtn);
+rockBtn.addEventListener ('click', () => {
+    playRound('rock', getComputerChoice());
+});
+
+const paperBtn = document.createElement ('button');
+paperBtn.textContent = 'Paper';
+document.body.appendChild(paperBtn);
+paperBtn.addEventListener ('click', () => {
+    playRound('paper', getComputerChoice());
+});
+
+const scissorsBtn = document.createElement ('button');
+scissorsBtn.textContent = 'Scissors';
+document.body.appendChild(scissorsBtn);
+scissorsBtn.addEventListener ('click', () => {
+    playRound('scissors', getComputerChoice());
+});
+
+//Display final scores after five rounds.
+const div = document.createElement ('div');
+document.body.appendChild (div);
+div.textContent = `Human Score; ${humanScore} - Computer Score: ${computerScore}`;
+
+function winnerCheck() {
+    if (humanScore === 5) {
+        console.log ("Congratulations! You are the overall winner!");
+    } else if (computerScore === 5) {
+        console.log ("You lose! The computer won the game.");
+    }
+};
+
+ The functions underneath are from the previous lesson:
+
+
+ function getUserChoice() {
+    const validChoices = ['rock', 'paper', 'scissors'];
+    const userInput = prompt('Choose rock, paper, or scissors:');
+    if (validChoices.includes(userInput.toLowerCase())) {
+        return userInput.toLowerCase();
+    } else {
+        console.log('Invalid choice. Please choose rock, paper, or scissors.');
+    }
+}
+
+function playGame () {
+    for (let i = 0; i < 5; i++) {
+        console.log (playRound (getUserChoice(), getComputerChoice ()));
+        console.log (`Score: You ${humanScore} - Computer ${computerScore}`);
+        if (i === 4) {
+            let finalResult = '';
+            if (humanScore > computerScore) {
+                finalResult = 'Congratulations! You won the game!';
+            } else if (computerScore > humanScore) {
+                finalResult = 'You Lost! Better luck next time!';
+            } else {
+                finalResult = "It's a tie!";
+            }
+            console.log (finalResult);
+        }
+    }
+}
+function getUserChoice() {
+    const validChoices = ['rock', 'paper', 'scissors'];
+    const userInput = prompt('Choose rock, paper, or scissors:');
+    if (validChoices.includes(userInput.toLowerCase())) {
+        return userInput.toLowerCase();
+    } else {
+        console.log('Invalid choice. Please choose rock, paper, or scissors.');
+    }
+}
+
+function playGame () {
+    for (let i = 0; i < 5; i++) {
+        console.log (playRound (getUserChoice(), getComputerChoice ()));
+        console.log (`Score: You ${humanScore} - Computer ${computerScore}`);
+        if (i === 4) {
+            let finalResult = '';
+            if (humanScore > computerScore) {
+                finalResult = 'Congratulations! You won the game!';
+            } else if (computerScore > humanScore) {
+                finalResult = 'You Lost! Better luck next time!';
+            } else {
+                finalResult = "It's a tie!";
+            }
+            console.log (finalResult);
+        }
+    }
+}function getUserChoice() {
+    const validChoices = ['rock', 'paper', 'scissors'];
+    const userInput = prompt('Choose rock, paper, or scissors:');
+    if (validChoices.includes(userInput.toLowerCase())) {
+        return userInput.toLowerCase();
+    } else {
+        console.log('Invalid choice. Please choose rock, paper, or scissors.');
+    }
+}
+
+function playGame () {
+    for (let i = 0; i < 5; i++) {
+        console.log (playRound (getUserChoice(), getComputerChoice ()));
+        console.log (`Score: You ${humanScore} - Computer ${computerScore}`);
+        if (i === 4) {
+            let finalResult = '';
+            if (humanScore > computerScore) {
+                finalResult = 'Congratulations! You won the game!';
+            } else if (computerScore > humanScore) {
+                finalResult = 'You Lost! Better luck next time!';
+            } else {
+                finalResult = "It's a tie!";
+            }
+            console.log (finalResult);
+        }
+    }
+}
+ btn.addEventListener('click', () =>{
+        const round = playRound('rock', getComputerChoice());
+        const round2 = playRound('paper', getComputerChoice());
+        const round3 = playRound('scissors', getComputerChoice());
+        console.log(round);
+    console.log(round2);
+    console.log(round3);
+    console.log(`Human Score: ${humanScore} | Computer Score: ${computerScore}`);
