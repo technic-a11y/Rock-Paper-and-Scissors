@@ -176,3 +176,65 @@ function playGame () {
     console.log(round2);
     console.log(round3);
     console.log(`Human Score: ${humanScore} | Computer Score: ${computerScore}`);
+
+
+
+
+
+
+
+
+    const rockBtn = document.createElement('button');
+rockBtn.textContent = 'Rock';
+document.body.appendChild(rockBtn);
+
+const paperBtn = document.createElement('button');
+paperBtn.textContent = 'Paper';
+document.body.appendChild(paperBtn);
+
+const scissorsBtn = document.createElement('button');
+scissorsBtn.textContent = 'Scissors';
+document.body.appendChild(scissorsBtn);
+
+
+rockBtn.addEventListener('click', () => {
+    const result = playRound('rock', getComputerChoice());
+    console.log(result);
+    return displayDiv();
+});
+
+paperBtn.addEventListener ('click', () => {
+    const result = playRound ('paper', getComputerChoice());
+    console.log (result);
+    return displayDiv();
+});
+
+scissorsBtn.addEventListener ('click', () => {
+    const result = playRound ('scissors', getComputerChoice());
+    console.log (result);
+    return displayDiv();
+});
+
+function checkWinner() {
+    for (let i = 0; i < 5; i++) {
+        if (humanScore === 5) {
+            return statementDiv ('Congratulations! You are the overall winner!');   
+        } else if (computerScore === 5) {
+            return statementDiv ('Sorry, the computer wins this time.');
+        } else {
+            return statementDiv ('The game is a tie!');
+        }
+}
+};
+
+const displayDiv = () => {
+    const scoreDiv = document.createElement('div');
+    scoreDiv.textContent = `Scores - You: ${humanScore}, Computer: ${computerScore}`;
+    document.body.appendChild(scoreDiv);
+};
+
+const statementDiv = () => {
+    const resultDiv = document.createElement('div');
+    resultDiv.textContent = playRound();
+    document.body.appendChild(resultDiv);
+};

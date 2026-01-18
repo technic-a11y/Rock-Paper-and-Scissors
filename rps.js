@@ -55,30 +55,49 @@ document.body.appendChild(scissorsBtn);
 rockBtn.addEventListener('click', () => {
     const result = playRound('rock', getComputerChoice());
     console.log(result);
-    console.log(`Scores - You: ${humanScore}, Computer: ${computerScore}`);
+    return displayDiv();
 });
 
 paperBtn.addEventListener ('click', () => {
     const result = playRound ('paper', getComputerChoice());
     console.log (result);
-    console.log (`Scores -You: ${humanScore}, Computer: ${computerScore}`);
+    return displayDiv();
 });
 
 scissorsBtn.addEventListener ('click', () => {
     const result = playRound ('scissors', getComputerChoice());
     console.log (result);
-    console.log (`Scores -You: ${humanScore}, Computer: ${computerScore}`);
+    return displayDiv();
 });
 
 function checkWinner() {
     for (let i = 0; i < 5; i++) {
         if (humanScore === 5) {
-            console.log ('Congratulations! You are the overall winner!');   
+            return ('Congratulations! You are the overall winner!');   
         } else if (computerScore === 5) {
-            console.log ('Sorry, the computer wins this time.');
+            return ('Sorry, the computer wins this time.');
+        } else if (humanScore === 5 && computerScore === 5) {
+            return ('The game is a tie!');
         } else {
-            console.log ('The game is a tie!');
+            return;
         }
 }
+};
+
+const div = document.querySelector('div');
+function displayDiv() {
+    div.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore}`;
+    if (humanScore === 5 || computerScore === 5) {
+        checkWinner();
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+    }
+    const resultMessage = checkWinner();
+    if (resultMessage) {
+        const resultDiv = document.createElement('div');
+        resultDiv.textContent = resultMessage;
+        document.body.appendChild(resultDiv);
+        resultDiv.appendChild(div);
+    }
 }
-// Try for.each method or maybe individual event listeners for each button?
